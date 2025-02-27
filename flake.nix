@@ -18,11 +18,12 @@
   outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }:
   let
     username = "assist";
+    homedir = "/Users/" + username;
 
     overlay = final: prev: {
-      python313Packages = prev.python313Packages // {
+      python312Packages = prev.python312Packages // {
         # Create a new package that includes all the standard extras
-        fastapi-standard = prev.python313.withPackages (ps: with ps; [
+        fastapi-standard = prev.python312.withPackages (ps: with ps; [
           fastapi fastapi-cli httpx jinja2 python-multipart
           email-validator uvicorn pyjwt
         ]);
@@ -51,10 +52,10 @@
         pkgs.nodejs_22
         pkgs.podman
         pkgs.podman-compose
-        pkgs.python313Full
-        pkgs.python313Packages.fastapi-standard
-        pkgs.python313Packages.flask
-        pkgs.python313Packages.pip
+        pkgs.python312Full
+        pkgs.python312Packages.fastapi-standard
+        pkgs.python312Packages.flask
+        pkgs.python312Packages.pip
         pkgs.tailwindcss_4
         pkgs.tcpdump
         pkgs.vim
@@ -84,13 +85,13 @@
       # Home-manager integration
       users.users.${username} = {
         name = username;
-        home = "/Users/${username}";
+        home = homedir;
       };
 
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
-        users.${username} = { pkgs, ... }: {
+        users.${username} = { config, pkgs, ... }: {
           home.stateVersion = "24.11";
 
           programs.command-not-found = {
