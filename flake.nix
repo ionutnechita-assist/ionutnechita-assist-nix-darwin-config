@@ -38,6 +38,7 @@
         pkgs.btop
         pkgs.colima
         pkgs.curl
+        pkgs.devbox
         pkgs.docker
         pkgs.docker-compose
         pkgs.file
