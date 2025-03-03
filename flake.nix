@@ -47,6 +47,7 @@
         pkgs.htop
         pkgs.man
         pkgs.nano
+        pkgs.ngrok
         pkgs.nix-zsh-completions
         pkgs.nixfmt-classic
         pkgs.nmap
@@ -82,6 +83,8 @@
 
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
+
+      nixpkgs.config.allowUnfree = true;
 
       # Home-manager integration
       users.users.${username} = {
